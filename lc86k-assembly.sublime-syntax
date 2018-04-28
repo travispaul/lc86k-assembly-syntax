@@ -1,0 +1,81 @@
+%YAML 1.2
+---
+# See http://www.sublimetext.com/docs/3/syntax.html
+name:    Assembly
+file_extensions: [s, i, asm]
+scope: source.LC86k
+
+contexts:
+  # The prototype context is prepended to all contexts but those setting
+  # meta_include_prototype: false.
+  prototype:
+    - include: comments
+
+  main:
+    # The main context is the initial starting point of our syntax.
+    # Include other contexts from here (or specify them directly).
+    - include: keywords
+    - include: numbers
+    - include: strings
+    - include: sfr
+    - include: psw
+    - include: support
+
+  keywords:
+    # Keywords are if, else for and while.
+    # Note that blackslashes don't need to be escaped within single quoted
+    # strings in YAML. When using single quoted strings, only single quotes
+    # need to be escaped: this is done by using two single quotes next to each
+    # other.
+    - match: '(?i)\b(and|or|xor|add|addc|sub|subc|inc|dec|mul|div)\b'
+      scope: keyword.operator
+    - match: '(?i)\b(st|mov|xch|ldc|jmp|jmpf|br|brf|bz|bnz|bp|bpc|bn|dbnz|be|bne|rol|rolc|ror|rorc|crl1|set1|not1|nop|equ)\b'
+      scope: keyword.control
+    - match: '(?i)\b(.org|.word|.byte)\b'
+      scope: keyword.declaration
+
+  numbers:
+    - match: '\b(-)?[0-9.]+\b'
+      scope: constant.numeric
+
+  strings:
+    # Strings begin and end with quotes, and use backslashes as an escape
+    # character.
+    - match: '"'
+      scope: punctuation.definition.string.begin
+      push: inside_string
+
+  inside_string:
+    - meta_include_prototype: false
+    - meta_scope: string.quoted.double
+    - match: '\.'
+      scope: constant.character.escape
+    - match: '"'
+      scope: punctuation.definition.string.end
+      pop: true
+
+  sfr:
+    # Special Function Registers
+    - match: '(?i)\b(ACC|PSW|B|C|TRL|TRH|SP|PCON|IE|IP|EXT|OCR|T0CON|T0PRR|T0L|T0LR|T0H|T0HR|T1CNT|T1LC|T1L|T1LR|T1HC|T1H|T1HR|MCR|STAD|CNR|TDR|XBNK|VCCR|SCON0|SBUF0|SBR|SCON1|SBUF1|P1|P1DDR|P1FCR|P3|P3DDR|P3INT|P7|I01CR|I23CR|ISL|VSEL|VRMAD1|VRMAD2|VTRBF|VLREG|BTCR|XRAM)\b'
+      scope: entity.name
+
+  psw:
+    # Processor Status Word Bits
+    - match: '(?i)\b(CY|AC|IRBK1|IRBK0|OV|RAMBK0|P)\b'
+      scope: entity.other
+
+  support:
+    - match: '(?i)^[.a-z0-9].+:\n'
+      scope: support.function
+
+  comments:
+    # Comments begin with either a ';' or '*' and finish at the end of the line.
+    - match: ';|\*'
+      scope: punctuation.definition.comment.begin
+      push:
+        # This is an anonymous context push for brevity.
+        - meta_scope: comment.line
+        - match: $\n?
+          pop: true
+        - match: ';'
+
