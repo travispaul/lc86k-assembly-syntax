@@ -1,7 +1,7 @@
 %YAML 1.2
 ---
 # See http://www.sublimetext.com/docs/3/syntax.html
-name:    Assembly
+name: LC86k Assembly
 file_extensions: [s, i, asm]
 scope: source.LC86k
 
