@@ -31,7 +31,7 @@ contexts:
       scope: keyword.operator
     - match: '(?i)\b(st|mov|xch|ldc|jmp|jmpf|br|brf|bz|bnz|bp|bpc|bn|dbnz|be|bne|rol|rolc|ror|rorc|crl1|set1|not1|nop|equ)\b'
       scope: keyword.control
-    - match: '(?i)\b(.org|.word|.byte)\b'
+    - match: '(?i)\b(.org|.word|.byte|.cnop)\b'
       scope: keyword.declaration
 
   numbers:
