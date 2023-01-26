@@ -29,7 +29,7 @@ contexts:
     # other.
     - match: '(?i)\b(and|or|xor|add|addc|sub|subc|inc|dec|mul|div)\b'
       scope: keyword.operator
-    - match: '(?i)\b(st|mov|xch|ldc|jmp|jmpf|br|brf|bz|bnz|bp|bpc|bn|dbnz|be|bne|rol|rolc|ror|rorc|crl1|set1|not1|nop|equ)\b'
+    - match: '(?i)\b(st|mov|xch|ldc|ldf|stf|jmp|jmpf|br|brf|bz|bnz|bp|bpc|bn|dbnz|be|bne|rol|rolc|ror|rorc|crl1|set1|not1|nop|equ)\b'
       scope: keyword.control
     - match: '(?i)\b(.org|.word|.byte|.cnop)\b'
       scope: keyword.declaration
@@ -56,7 +56,7 @@ contexts:
 
   sfr:
     # Special Function Registers
-    - match: '(?i)\b(ACC|PSW|B|C|TRL|TRH|SP|PCON|IE|IP|EXT|OCR|T0CON|T0PRR|T0L|T0LR|T0H|T0HR|T1CNT|T1LC|T1L|T1LR|T1HC|T1H|T1HR|MCR|STAD|CNR|TDR|XBNK|VCCR|SCON0|SBUF0|SBR|SCON1|SBUF1|P1|P1DDR|P1FCR|P3|P3DDR|P3INT|P7|I01CR|I23CR|ISL|VSEL|VRMAD1|VRMAD2|VTRBF|VLREG|BTCR|XRAM)\b'
+    - match: '(?i)\b(ACC|PSW|B|C|TRL|TRH|SP|PCON|IE|IP|EXT|OCR|T0CON|T0PRR|T0L|T0LR|T0H|T0HR|T1CNT|T1LC|T1L|T1LR|T1HC|T1H|T1HR|MCR|STAD|CNR|TDR|XBNK|VCCR|SCON0|SBUF0|SBR|SCON1|SBUF1|P1|P1DDR|P1FCR|P3|P3DDR|P3INT|P7|I01CR|I23CR|ISL|VSEL|VRMAD1|VRMAD2|VTRBF|VLREG|BTCR|XRAM|FPR)\b'
       scope: entity.name
 
   psw:
